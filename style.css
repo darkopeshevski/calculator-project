@@ -51,7 +51,7 @@ button {
 .row.row-2 button:nth-child(4),
 .row.row-3 button:nth-child(4),
 .row.row-4 button:nth-child(4) {
-  margin-left: 5px; /* Adjust the margin as needed */
+  margin-left: 5px; 
 }
 
 .row.row-5 button:nth-child(2) {

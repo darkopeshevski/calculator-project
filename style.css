@@ -1,0 +1,59 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  height: 100vh;
+  background-color: blanchedalmond;
+}
+
+.mama {
+  background-color: aqua;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  width: 300px;
+  gap: 10px;
+}
+
+.screen {
+  background-color: aliceblue;
+  width: 100%;
+  max-width: 90%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 5px;
+  padding-right: 10px;
+
+}
+
+.row {
+  display: flex;
+  width: 100%;
+  max-width: 90%;
+}
+
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.row.row-1 button:nth-child(2) {
+  margin-left: 5px;
+}
+
+.row.row-2 button:nth-child(4),
+.row.row-3 button:nth-child(4),
+.row.row-4 button:nth-child(4) {
+  margin-left: 5px; /* Adjust the margin as needed */
+}
+
+.row.row-5 button:nth-child(2) {
+  margin-left: 5px;
+}

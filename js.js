@@ -9,58 +9,94 @@ const deleteButton = document.querySelector(".delete-button");
 let firstNumber = 0;
 let secondNumber = 0;
 let operator = "";
+let displayResult = "";
 
-deleteButton.addEventListener('mousedown', function() {
-  screen.textContent = "";
-  firstNumber = 0;
-  secondNumber = 0;
-})
-
-equalsButton.addEventListener('mousedown', function() {
-  secondNumber = parseInt(screen.textContent);
-  let kur = subtract(firstNumber, secondNumber);
-  // console.log(kur);
-  screen.textContent = kur;
-})
-
+// Putting content on the screen.
 allNumberButtons.forEach(button => {
 
   button.addEventListener('mousedown', function() {
     screen.textContent += button.textContent;
-    console.log(screen.textContent);
+    displayResult = screen.textContent;
+    console.log(displayResult);
   })
-  
 });
+
+// Deleting the screen context and restarting everything.
+deleteButton.addEventListener('mousedown', function() {
+  screen.textContent = "";
+  firstNumber = 0;
+  secondNumber = 0;
+  operator = "";
+  displayResult = "";
+});
+
+
+// Performing the operation between the two numbers based on what the operator variable is.
+equalsButton.addEventListener('mousedown', function() {
+
+  secondNumber = parseInt(displayResult);
+
+  let result = operate(firstNumber, operator, secondNumber);
+  screen.textContent = result;
+});
+
 
 allOperatorButtons.forEach(button => {
   button.addEventListener('mousedown', function() {
 
-    if (!firstNumber & button.textContent === "-") {
-      let firstContext = screen.textContent;
-      console.log(`first context - ${firstContext}`);
-      
-      let intoNum = parseInt(firstContext);
-      firstNumber = intoNum;
-      console.log(`firstNumber - ${firstNumber}`);
+    if (button.textContent === "-") {
+      firstNumber = parseInt(displayResult);
       operator = "-";
       screen.textContent = "";
     }
 
-    else if (!firstNumber & button.textContent === "+") {
-      let firstContext = screen.textContent;
-      console.log(`first context - ${firstContext}`);
-      
-      let intoNum = parseInt(firstContext);
-      firstNumber = intoNum;
-      console.log(`firstNumber - ${firstNumber}`);
+    else if (button.textContent === "+") {
+      firstNumber = parseInt(displayResult);
+      operator = "+";
+      screen.textContent = "";
+    }
 
+    else if (button.textContent === "/") {
+      firstNumber = parseInt(displayResult);
+      operator = "/";
+      screen.textContent = "";
+    }
+
+    else if (button.textContent === "x") {
+      firstNumber = parseInt(displayResult);
+      operator = "x";
       screen.textContent = "";
     }
 
   })
-})
+});
 
 
+// Function that operates.
+function operate(num1, operator, num2) {
+  if (operator === "-") {
+    const result = subtract(num1, num2);
+    return result;
+  }
+
+  else if (operator === "+") {
+    const result = add(num1, num2);
+    return result;
+  }
+
+  else if (operator === "x") {
+    const result = multiply(num1, num2);
+    return result;
+  }
+  
+  else if (operator === "/") {
+    const result = divide(num1, num2);
+    return result;
+  }
+}
+
+
+// Functions that add, subtract, etc... between two numbers.
 function add(num1, num2) {
   return num1 + num2;
 }

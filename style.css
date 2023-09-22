@@ -44,7 +44,12 @@ button {
   flex: 1;
 }
 
-.row.row-1 button:nth-child(2) {
+.row.row-1 button {
+  flex: 1;
+}
+
+.row.row-1 .operator-button {
+  flex: 2; 
   margin-left: 5px;
 }
 

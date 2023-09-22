@@ -1,115 +1,138 @@
-
-
 const screen = document.querySelector(".screen");
 const allNumberButtons = document.querySelectorAll(".number-button");
 const allOperatorButtons = document.querySelectorAll(".operator-button");
 const equalsButton = document.querySelector(".equals-button");
 const deleteButton = document.querySelector(".delete-button");
+const backspaceButton = document.querySelector(".back-button");
 
+screen.textContent = "0";
+let screenContent = "";
 let firstNumber = 0;
-let secondNumber = 0;
 let operator = "";
-let displayResult = "";
+let flag = false;
 
-// Putting content on the screen.
+function operate() {
+if (operator === "+") {
+  firstNumber += parseInt(screenContent);
+  console.log(`firstNumber : ${firstNumber}`);
+}
+
+else if (operator === "-") {
+  firstNumber -= parseInt(screenContent);
+  console.log(`firstNumber : ${firstNumber}`);
+}
+
+else if (operator === "/") {
+  firstNumber /= parseInt(screenContent);
+  console.log(`firstNumber : ${firstNumber}`);
+}
+
+else if (operator === "x") {
+  firstNumber *= parseInt(screenContent);
+  console.log(`firstNumber : ${firstNumber}`);
+}
+
+else {
+  firstNumber = parseInt(screenContent);
+  console.log(`firstNumber : ${firstNumber}`);
+}
+}
+
+// Inserting numbers on the screen.
 allNumberButtons.forEach(button => {
-
-  button.addEventListener('mousedown', function() {
-    screen.textContent += button.textContent;
-    displayResult = screen.textContent;
-    console.log(displayResult);
-  })
-});
-
-// Deleting the screen context and restarting everything.
-deleteButton.addEventListener('mousedown', function() {
-  screen.textContent = "";
-  firstNumber = 0;
-  secondNumber = 0;
-  operator = "";
-  displayResult = "";
-});
-
-
-// Performing the operation between the two numbers based on what the operator variable is.
-equalsButton.addEventListener('mousedown', function() {
-
-  secondNumber = parseInt(displayResult);
-
-  let result = operate(firstNumber, operator, secondNumber);
-  screen.textContent = result;
-});
-
-
-allOperatorButtons.forEach(button => {
-  button.addEventListener('mousedown', function() {
-
-    if (button.textContent === "-") {
-      firstNumber = parseInt(displayResult);
-      operator = "-";
+  button.addEventListener('click', function() {
+    if (screen.textContent === "0") {
       screen.textContent = "";
     }
 
-    else if (button.textContent === "+") {
-      firstNumber = parseInt(displayResult);
-      operator = "+";
+    if (flag === true) {
+      console.log("kur");
       screen.textContent = "";
+      flag = false;
+    }
+    
+    screen.textContent += button.textContent;
+    screenContent = screen.textContent;
+    console.log(`screenContent = ${screenContent}`);
+    
+  })
+})
+
+allOperatorButtons.forEach(button => {
+  button.addEventListener('click', function() {
+
+    if (button.textContent === "+") {
+      operate();
+      operator = "+";
+      flag = true;
+      console.log(`Screen content : ${screenContent}`);
+      console.log(flag);
+    }
+
+    else if (button.textContent === "-") {
+      operate();
+      operator = "-";
+      flag = true;
+      console.log(`Screen content : ${screenContent}`);
+      console.log(flag);
     }
 
     else if (button.textContent === "/") {
-      firstNumber = parseInt(displayResult);
+      operate();
       operator = "/";
-      screen.textContent = "";
+      flag = true;
+      console.log(`Screen content : ${screenContent}`);
+      console.log(flag);
     }
 
     else if (button.textContent === "x") {
-      firstNumber = parseInt(displayResult);
+      operate();
       operator = "x";
-      screen.textContent = "";
+      flag = true;
+      console.log(`Screen content : ${screenContent}`);
+      console.log(flag);
     }
 
   })
-});
+})
 
-
-// Function that operates.
-function operate(num1, operator, num2) {
-  if (operator === "-") {
-    const result = subtract(num1, num2);
-    return result;
+equalsButton.addEventListener('click', function() {
+  if (operator === "+") {
+    console.log(`firstNUmber = ${firstNumber}, screenContent = ${screenContent}`);
+    let result = firstNumber + parseInt(screenContent);
+    screen.textContent = result;
+    console.log(`result = ${result}, screen = ${screen.textContent}`);
   }
 
-  else if (operator === "+") {
-    const result = add(num1, num2);
-    return result;
+  else if (operator === "-") {
+    console.log(`firstNUmber = ${firstNumber}, screenContent = ${screenContent}`);
+    let result = firstNumber - parseInt(screenContent);
+    screen.textContent = result;
+    console.log(`result = ${result}, screen = ${screen.textContent}`);
   }
 
   else if (operator === "x") {
-    const result = multiply(num1, num2);
-    return result;
+    console.log(`firstNUmber = ${firstNumber}, screenContent = ${screenContent}`);
+    let result = firstNumber * parseInt(screenContent);
+    screen.textContent = result;
+    console.log(`result = ${result}, screen = ${screen.textContent}`);
   }
-  
+
   else if (operator === "/") {
-    const result = divide(num1, num2);
-    return result;
+    console.log(`firstNUmber = ${firstNumber}, screenContent = ${screenContent}`);
+    let result = firstNumber / parseInt(screenContent);
+    screen.textContent = result;
+    console.log(`result = ${result}, screen = ${screen.textContent}`);
   }
-}
+
+})
+
+deleteButton.addEventListener('click', function() {
+  screen.textContent = "0";
+  firstNumber = 0;
+  operator = "";
+  flag = false;
+})
 
 
-// Functions that add, subtract, etc... between two numbers.
-function add(num1, num2) {
-  return num1 + num2;
-}
-
-function subtract(num1, num2) {
-  return num1 - num2;
-}
-
-function multiply(num1, num2) {
-  return num1 * num2;
-}
-
-function divide(num1, num2) {
-  return num1 / num2;
-}
 

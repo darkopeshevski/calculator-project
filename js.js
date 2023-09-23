@@ -14,26 +14,31 @@ let flag = false;
 function operate() {
 if (operator === "+") {
   firstNumber += parseInt(screenContent);
+  screen.textContent = firstNumber;
   console.log(`firstNumber : ${firstNumber}`);
 }
 
 else if (operator === "-") {
   firstNumber -= parseInt(screenContent);
+  screen.textContent = firstNumber;
   console.log(`firstNumber : ${firstNumber}`);
 }
 
 else if (operator === "/") {
   firstNumber /= parseInt(screenContent);
+  screen.textContent = firstNumber;
   console.log(`firstNumber : ${firstNumber}`);
 }
 
 else if (operator === "x") {
   firstNumber *= parseInt(screenContent);
+  screen.textContent = firstNumber;
   console.log(`firstNumber : ${firstNumber}`);
 }
 
 else {
   firstNumber = parseInt(screenContent);
+  screen.textContent = firstNumber;
   console.log(`firstNumber : ${firstNumber}`);
 }
 }
@@ -137,9 +142,11 @@ deleteButton.addEventListener('click', function() {
 backspaceButton.addEventListener('click', function() {
   screen.textContent = screen.textContent.slice(0, -1);
   
+  if (!screen.textContent) {
+    screen.textContent = "0";
+  }
   screenContent = screen.textContent;
   console.log(screenContent);
-
 })
 
 

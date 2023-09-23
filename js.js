@@ -54,7 +54,6 @@ allNumberButtons.forEach(button => {
     screen.textContent += button.textContent;
     screenContent = screen.textContent;
     console.log(`screenContent = ${screenContent}`);
-    
   })
 })
 
@@ -134,5 +133,13 @@ deleteButton.addEventListener('click', function() {
   flag = false;
 })
 
+// Slicing off the last number on the screen.
+backspaceButton.addEventListener('click', function() {
+  screen.textContent = screen.textContent.slice(0, -1);
+  
+  screenContent = screen.textContent;
+  console.log(screenContent);
+
+})
 
 

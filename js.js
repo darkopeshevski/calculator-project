@@ -4,54 +4,66 @@ const allOperatorButtons = document.querySelectorAll(".operator-button");
 const equalsButton = document.querySelector(".equals-button");
 const deleteButton = document.querySelector(".delete-button");
 const backspaceButton = document.querySelector(".back-button");
+const tempScreen = document.querySelector(".temporary-screen");
 
+// Some global variables.
+tempScreen.textContent = "";
 screen.textContent = "0";
 let screenContent = "";
 let firstNumber = 0;
 let operator = "";
 let flag = false;
+let equalsFlag = false;
 
+// The operate function.
 function operate() {
-if (operator === "+") {
-  firstNumber += parseInt(screenContent);
-  screen.textContent = firstNumber;
-  console.log(`firstNumber : ${firstNumber}`);
-}
+  if (operator === "+") {
+    firstNumber += parseInt(screenContent);
+    screen.textContent = firstNumber;
+    console.log(`firstNumber : ${firstNumber}`);
+  }
 
-else if (operator === "-") {
-  firstNumber -= parseInt(screenContent);
-  screen.textContent = firstNumber;
-  console.log(`firstNumber : ${firstNumber}`);
-}
+  else if (operator === "-") {
+    firstNumber -= parseInt(screenContent);
+    screen.textContent = firstNumber;
+    console.log(`firstNumber : ${firstNumber}`);
+  }
 
-else if (operator === "/") {
-  firstNumber /= parseInt(screenContent);
-  screen.textContent = firstNumber;
-  console.log(`firstNumber : ${firstNumber}`);
-}
+  else if (operator === "/") {
+    firstNumber /= parseInt(screenContent);
+    screen.textContent = firstNumber;
+    console.log(`firstNumber : ${firstNumber}`);
+  }
 
-else if (operator === "x") {
-  firstNumber *= parseInt(screenContent);
-  screen.textContent = firstNumber;
-  console.log(`firstNumber : ${firstNumber}`);
-}
+  else if (operator === "x") {
+    firstNumber *= parseInt(screenContent);
+    screen.textContent = firstNumber;
+    console.log(`firstNumber : ${firstNumber}`);
+  }
 
-else {
-  firstNumber = parseInt(screenContent);
-  screen.textContent = firstNumber;
-  console.log(`firstNumber : ${firstNumber}`);
-}
-}
+  else {
+    firstNumber = parseInt(screenContent);
+    screen.textContent = firstNumber;
+    console.log(`firstNumber : ${firstNumber}`);
+  }
+};
+
 
 // Inserting numbers on the screen.
 allNumberButtons.forEach(button => {
   button.addEventListener('click', function() {
+
+    if (equalsFlag === true) {
+      tempScreen.textContent = "";
+      screen.textContent = "";
+      equalsFlag = false;
+    }
+
     if (screen.textContent === "0") {
       screen.textContent = "";
     }
 
     if (flag === true) {
-      console.log("kur");
       screen.textContent = "";
       flag = false;
     }
@@ -60,7 +72,7 @@ allNumberButtons.forEach(button => {
     screenContent = screen.textContent;
     console.log(`screenContent = ${screenContent}`);
   })
-})
+});
 
 allOperatorButtons.forEach(button => {
   button.addEventListener('click', function() {
@@ -71,6 +83,7 @@ allOperatorButtons.forEach(button => {
       flag = true;
       console.log(`Screen content : ${screenContent}`);
       console.log(flag);
+      tempScreen.textContent += `${screenContent} + `;
     }
 
     else if (button.textContent === "-") {
@@ -79,6 +92,7 @@ allOperatorButtons.forEach(button => {
       flag = true;
       console.log(`Screen content : ${screenContent}`);
       console.log(flag);
+      tempScreen.textContent += `${screenContent} - `;
     }
 
     else if (button.textContent === "/") {
@@ -87,6 +101,7 @@ allOperatorButtons.forEach(button => {
       flag = true;
       console.log(`Screen content : ${screenContent}`);
       console.log(flag);
+      tempScreen.textContent += `${screenContent} / `;
     }
 
     else if (button.textContent === "x") {
@@ -95,16 +110,20 @@ allOperatorButtons.forEach(button => {
       flag = true;
       console.log(`Screen content : ${screenContent}`);
       console.log(flag);
+      tempScreen.textContent += `${screenContent} x `;
     }
 
   })
-})
+});
 
+// The equals button and its functionality.
 equalsButton.addEventListener('click', function() {
   if (operator === "+") {
     console.log(`firstNUmber = ${firstNumber}, screenContent = ${screenContent}`);
     let result = firstNumber + parseInt(screenContent);
     screen.textContent = result;
+    tempScreen.textContent += `${screenContent} = ${result}`;
+    equalsFlag = true;
     console.log(`result = ${result}, screen = ${screen.textContent}`);
   }
 
@@ -112,6 +131,8 @@ equalsButton.addEventListener('click', function() {
     console.log(`firstNUmber = ${firstNumber}, screenContent = ${screenContent}`);
     let result = firstNumber - parseInt(screenContent);
     screen.textContent = result;
+    tempScreen.textContent += `${screenContent} = ${result}`;
+    equalsFlag = true;
     console.log(`result = ${result}, screen = ${screen.textContent}`);
   }
 
@@ -119,6 +140,8 @@ equalsButton.addEventListener('click', function() {
     console.log(`firstNUmber = ${firstNumber}, screenContent = ${screenContent}`);
     let result = firstNumber * parseInt(screenContent);
     screen.textContent = result;
+    tempScreen.textContent += `${screenContent} = ${result}`;
+    equalsFlag = true;
     console.log(`result = ${result}, screen = ${screen.textContent}`);
   }
 
@@ -126,19 +149,23 @@ equalsButton.addEventListener('click', function() {
     console.log(`firstNUmber = ${firstNumber}, screenContent = ${screenContent}`);
     let result = firstNumber / parseInt(screenContent);
     screen.textContent = result;
+    tempScreen.textContent += `${screenContent} = ${result}`;
+    equalsFlag = true;
     console.log(`result = ${result}, screen = ${screen.textContent}`);
   }
-
+  
 })
 
+// Delete button to delete everything from the 2 screens and reset all the variables.
 deleteButton.addEventListener('click', function() {
+  tempScreen.textContent = "";
   screen.textContent = "0";
   firstNumber = 0;
   operator = "";
   flag = false;
 })
 
-// Slicing off the last number on the screen.
+// Slicing off the last number on the 2 screens.
 backspaceButton.addEventListener('click', function() {
   screen.textContent = screen.textContent.slice(0, -1);
   
@@ -149,4 +176,10 @@ backspaceButton.addEventListener('click', function() {
   console.log(screenContent);
 })
 
+function resetTempScreen() {
+  if (equalsFlag === true) {
+    tempScreen.textContent = "";
+
+  }
+}
 

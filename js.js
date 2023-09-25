@@ -17,7 +17,6 @@ let equalsFlag = false;
 
 // The operate function.
 function operate() {
-  console.log(`OPERATORR EEE ${operator}`);
   if (operator === "+") {
     firstNumber += parseInt(screenContent);
     screen.textContent = firstNumber;
@@ -46,7 +45,6 @@ function operate() {
     firstNumber = parseInt(screenContent);
     screen.textContent = firstNumber;
     console.log(`firstNumber : ${firstNumber}`);
-    
   }
 };
 
@@ -73,7 +71,6 @@ allNumberButtons.forEach(button => {
     screen.textContent += button.textContent;
     screenContent = screen.textContent;
     console.log(`screenContent = ${screenContent}`);
-    console.log("PENISSSS");
   })
 });
 
@@ -83,7 +80,10 @@ allOperatorButtons.forEach(button => {
   button.addEventListener('click', function() {
 
     if (button.textContent === "+") {
-      
+      if (equalsFlag === true) {
+        tempScreen.textContent = "";
+        equalsFlag = false;
+      }
       operate();
       operator = "+";
       flag = true;
@@ -92,16 +92,23 @@ allOperatorButtons.forEach(button => {
     }
 
     else if (button.textContent === "-") {
+      if (equalsFlag === true) {
+        tempScreen.textContent = "";
+        equalsFlag = false;
+      }
       operate();
       operator = "-";
       flag = true;
       console.log(`Screen content : ${screenContent}`);
       console.log(flag);
       tempScreen.textContent += `${screenContent} - `;
-      console.log(`jedi mi kurac brate`);
     }
 
     else if (button.textContent === "/") {
+      if (equalsFlag === true) {
+        tempScreen.textContent = "";
+        equalsFlag = false;
+      }
       operate();
       operator = "/";
       flag = true;
@@ -111,6 +118,10 @@ allOperatorButtons.forEach(button => {
     }
 
     else if (button.textContent === "x") {
+      if (equalsFlag === true) {
+        tempScreen.textContent = "";
+        equalsFlag = false;
+      }
       operate();
       operator = "x";
       flag = true;

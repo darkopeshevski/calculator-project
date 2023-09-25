@@ -52,25 +52,28 @@ function operate() {
 // Inserting numbers on the screen.
 allNumberButtons.forEach(button => {
   button.addEventListener('click', function() {
+    console.log(screen.textContent.length);
 
-    if (equalsFlag === true) {
-      upperScreen.textContent = "";
-      screen.textContent = "";
-      equalsFlag = false;
-    }
-
-    if (screen.textContent === "0") {
-      screen.textContent = "";
-    }
-
-    if (flag === true) {
-      screen.textContent = "";
-      flag = false;
-    }
+    if (screen.textContent.length <= 31) {
+      if (equalsFlag === true) {
+        upperScreen.textContent = "";
+        screen.textContent = "";
+        equalsFlag = false;
+      }
+      
+      if (screen.textContent === "0") {
+        screen.textContent = "";
+      }
   
-    screen.textContent += button.textContent;
-    screenContent = screen.textContent;
-    console.log(`screenContent = ${screenContent}`);
+      if (flag === true) {
+        screen.textContent = "";
+        flag = false;
+      }
+    
+      screen.textContent += button.textContent;
+      screenContent = screen.textContent;
+      console.log(`screenContent = ${screenContent}`);
+    }
   })
 });
 

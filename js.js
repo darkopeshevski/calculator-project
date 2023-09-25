@@ -17,6 +17,7 @@ let equalsFlag = false;
 
 // The operate function.
 function operate() {
+  console.log(`OPERATORR EEE ${operator}`);
   if (operator === "+") {
     firstNumber += parseInt(screenContent);
     screen.textContent = firstNumber;
@@ -45,6 +46,7 @@ function operate() {
     firstNumber = parseInt(screenContent);
     screen.textContent = firstNumber;
     console.log(`firstNumber : ${firstNumber}`);
+    
   }
 };
 
@@ -67,22 +69,25 @@ allNumberButtons.forEach(button => {
       screen.textContent = "";
       flag = false;
     }
-    
+  
     screen.textContent += button.textContent;
     screenContent = screen.textContent;
     console.log(`screenContent = ${screenContent}`);
+    console.log("PENISSSS");
   })
 });
 
+
+// The operator buttons and their functionality.
 allOperatorButtons.forEach(button => {
   button.addEventListener('click', function() {
 
     if (button.textContent === "+") {
+      
       operate();
       operator = "+";
       flag = true;
       console.log(`Screen content : ${screenContent}`);
-      console.log(flag);
       tempScreen.textContent += `${screenContent} + `;
     }
 
@@ -93,6 +98,7 @@ allOperatorButtons.forEach(button => {
       console.log(`Screen content : ${screenContent}`);
       console.log(flag);
       tempScreen.textContent += `${screenContent} - `;
+      console.log(`jedi mi kurac brate`);
     }
 
     else if (button.textContent === "/") {
@@ -124,7 +130,9 @@ equalsButton.addEventListener('click', function() {
     screen.textContent = result;
     tempScreen.textContent += `${screenContent} = ${result}`;
     equalsFlag = true;
-    console.log(`result = ${result}, screen = ${screen.textContent}`);
+    operator = "";
+    screenContent = result;
+    console.log(`firstNumber = ${firstNumber}, screen = ${screen.textContent}, screenContent = ${screenContent}`);
   }
 
   else if (operator === "-") {
@@ -133,7 +141,9 @@ equalsButton.addEventListener('click', function() {
     screen.textContent = result;
     tempScreen.textContent += `${screenContent} = ${result}`;
     equalsFlag = true;
-    console.log(`result = ${result}, screen = ${screen.textContent}`);
+    operator = "";
+    screenContent = result;
+    console.log(`firstNumber = ${firstNumber}, screen = ${screen.textContent}, screenContent = ${screenContent}`);
   }
 
   else if (operator === "x") {
@@ -142,7 +152,9 @@ equalsButton.addEventListener('click', function() {
     screen.textContent = result;
     tempScreen.textContent += `${screenContent} = ${result}`;
     equalsFlag = true;
-    console.log(`result = ${result}, screen = ${screen.textContent}`);
+    operator = "";
+    screenContent = result;
+    console.log(`firstNumber = ${firstNumber}, screen = ${screen.textContent}, screenContent = ${screenContent}`);
   }
 
   else if (operator === "/") {
@@ -151,7 +163,9 @@ equalsButton.addEventListener('click', function() {
     screen.textContent = result;
     tempScreen.textContent += `${screenContent} = ${result}`;
     equalsFlag = true;
-    console.log(`result = ${result}, screen = ${screen.textContent}`);
+    operator = "";
+    screenContent = result;
+    console.log(`firstNumber = ${firstNumber}, screen = ${screen.textContent}, screenContent = ${screenContent}`);
   }
   
 })
@@ -174,12 +188,6 @@ backspaceButton.addEventListener('click', function() {
   }
   screenContent = screen.textContent;
   console.log(screenContent);
-})
+});
 
-function resetTempScreen() {
-  if (equalsFlag === true) {
-    tempScreen.textContent = "";
-
-  }
-}
 

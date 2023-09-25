@@ -48,6 +48,33 @@ function operate() {
   }
 };
 
+// Inserting numbers on the screen by typing on the keyboard.
+window.addEventListener('keydown', function(event) {
+  const button = this.document.querySelector(`button[code="${event.code}"]`);
+  console.log(event.code);
+
+  if (screen.textContent.length <= 31) {
+    if (equalsFlag === true) {
+      upperScreen.textContent = "";
+      screen.textContent = "";
+      equalsFlag = false;
+    }
+    
+    if (screen.textContent === "0") {
+      screen.textContent = "";
+    }
+
+    if (flag === true) {
+      screen.textContent = "";
+      flag = false;
+    }
+  
+    screen.textContent += button.textContent;
+    screenContent = screen.textContent;
+    console.log(`screenContent = ${screenContent}`);
+  }
+});
+
 
 // Inserting numbers on the screen.
 allNumberButtons.forEach(button => {
@@ -191,6 +218,8 @@ deleteButton.addEventListener('click', function() {
   firstNumber = 0;
   operator = "";
   flag = false;
+  screenContent = "";
+  console.log(`screenContent = ${screenContent}`);
 })
 
 // Slicing off the last number on the 2 screens.

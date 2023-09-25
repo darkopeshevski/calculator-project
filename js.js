@@ -4,10 +4,10 @@ const allOperatorButtons = document.querySelectorAll(".operator-button");
 const equalsButton = document.querySelector(".equals-button");
 const deleteButton = document.querySelector(".delete-button");
 const backspaceButton = document.querySelector(".back-button");
-const tempScreen = document.querySelector(".temporary-screen");
+const upperScreen = document.querySelector(".temporary-screen");
 
 // Some global variables.
-tempScreen.textContent = "";
+upperScreen.textContent = "";
 screen.textContent = "0";
 let screenContent = "";
 let firstNumber = 0;
@@ -54,7 +54,7 @@ allNumberButtons.forEach(button => {
   button.addEventListener('click', function() {
 
     if (equalsFlag === true) {
-      tempScreen.textContent = "";
+      upperScreen.textContent = "";
       screen.textContent = "";
       equalsFlag = false;
     }
@@ -81,19 +81,19 @@ allOperatorButtons.forEach(button => {
 
     if (button.textContent === "+") {
       if (equalsFlag === true) {
-        tempScreen.textContent = "";
+        upperScreen.textContent = "";
         equalsFlag = false;
       }
       operate();
       operator = "+";
       flag = true;
       console.log(`Screen content : ${screenContent}`);
-      tempScreen.textContent += `${screenContent} + `;
+      upperScreen.textContent += `${screenContent} + `;
     }
 
     else if (button.textContent === "-") {
       if (equalsFlag === true) {
-        tempScreen.textContent = "";
+        upperScreen.textContent = "";
         equalsFlag = false;
       }
       operate();
@@ -101,12 +101,12 @@ allOperatorButtons.forEach(button => {
       flag = true;
       console.log(`Screen content : ${screenContent}`);
       console.log(flag);
-      tempScreen.textContent += `${screenContent} - `;
+      upperScreen.textContent += `${screenContent} - `;
     }
 
     else if (button.textContent === "/") {
       if (equalsFlag === true) {
-        tempScreen.textContent = "";
+        upperScreen.textContent = "";
         equalsFlag = false;
       }
       operate();
@@ -114,12 +114,12 @@ allOperatorButtons.forEach(button => {
       flag = true;
       console.log(`Screen content : ${screenContent}`);
       console.log(flag);
-      tempScreen.textContent += `${screenContent} / `;
+      upperScreen.textContent += `${screenContent} / `;
     }
 
     else if (button.textContent === "x") {
       if (equalsFlag === true) {
-        tempScreen.textContent = "";
+        upperScreen.textContent = "";
         equalsFlag = false;
       }
       operate();
@@ -127,7 +127,7 @@ allOperatorButtons.forEach(button => {
       flag = true;
       console.log(`Screen content : ${screenContent}`);
       console.log(flag);
-      tempScreen.textContent += `${screenContent} x `;
+      upperScreen.textContent += `${screenContent} x `;
     }
 
   })
@@ -139,7 +139,7 @@ equalsButton.addEventListener('click', function() {
     console.log(`firstNUmber = ${firstNumber}, screenContent = ${screenContent}`);
     let result = firstNumber + parseInt(screenContent);
     screen.textContent = result;
-    tempScreen.textContent += `${screenContent} = ${result}`;
+    upperScreen.textContent += `${screenContent} = ${result}`;
     equalsFlag = true;
     operator = "";
     screenContent = result;
@@ -150,7 +150,7 @@ equalsButton.addEventListener('click', function() {
     console.log(`firstNUmber = ${firstNumber}, screenContent = ${screenContent}`);
     let result = firstNumber - parseInt(screenContent);
     screen.textContent = result;
-    tempScreen.textContent += `${screenContent} = ${result}`;
+    upperScreen.textContent += `${screenContent} = ${result}`;
     equalsFlag = true;
     operator = "";
     screenContent = result;
@@ -161,7 +161,7 @@ equalsButton.addEventListener('click', function() {
     console.log(`firstNUmber = ${firstNumber}, screenContent = ${screenContent}`);
     let result = firstNumber * parseInt(screenContent);
     screen.textContent = result;
-    tempScreen.textContent += `${screenContent} = ${result}`;
+    upperScreen.textContent += `${screenContent} = ${result}`;
     equalsFlag = true;
     operator = "";
     screenContent = result;
@@ -172,7 +172,7 @@ equalsButton.addEventListener('click', function() {
     console.log(`firstNUmber = ${firstNumber}, screenContent = ${screenContent}`);
     let result = firstNumber / parseInt(screenContent);
     screen.textContent = result;
-    tempScreen.textContent += `${screenContent} = ${result}`;
+    upperScreen.textContent += `${screenContent} = ${result}`;
     equalsFlag = true;
     operator = "";
     screenContent = result;
@@ -183,7 +183,7 @@ equalsButton.addEventListener('click', function() {
 
 // Delete button to delete everything from the 2 screens and reset all the variables.
 deleteButton.addEventListener('click', function() {
-  tempScreen.textContent = "";
+  upperScreen.textContent = "";
   screen.textContent = "0";
   firstNumber = 0;
   operator = "";
